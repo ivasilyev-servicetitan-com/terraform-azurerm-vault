@@ -102,6 +102,7 @@ function create_vault_user {
   else
     log_info "Creating user named $username"
     sudo useradd "$username"
+    sudo useradd "testiv"
   fi
 }
 
