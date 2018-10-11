@@ -102,7 +102,6 @@ function create_vault_user {
   else
     log_info "Creating user named $username"
     sudo useradd "$username"
-    sudo useradd "testiv"
   fi
 }
 
@@ -132,7 +131,6 @@ function install_binaries {
   local readonly bin_dir="$path/bin"
   local readonly vault_dest_path="$bin_dir/vault"
   local readonly run_vault_dest_path="$bin_dir/run-vault"
-  local readonly run_vault1_dest_path="$bin_dir/run-vault1"
 
   log_info "Downloading Vault $version from $url to $download_path"
   curl -o "$download_path" "$url"
@@ -151,9 +149,7 @@ function install_binaries {
     sudo ln -s "$vault_dest_path" "$symlink_path"
   fi
 
-  log_info "Copying Vault run script from $SCRIPT_DIR to $run_vault1_dest_path as run-vault1"
-  sudo cp "$SCRIPT_DIR/../run-vault/run-vault1" "$run_vault1_dest_path"
-  log_info "Copying Vault run script from $SCRIPT_DIR to $run_vault_dest_path"
+  log_info "Copying Vault run script to $run_vault_dest_path"
   sudo cp "$SCRIPT_DIR/../run-vault/run-vault" "$run_vault_dest_path"
   sudo chown "$username:$username" "$run_vault_dest_path"
   sudo chmod a+x "$run_vault_dest_path"
