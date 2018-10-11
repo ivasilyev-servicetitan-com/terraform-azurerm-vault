@@ -64,12 +64,12 @@ variable "subnet_address" {
 
 variable "consul_cluster_name" {
   description = "What to name the Consul cluster and all of its associated resources"
-  default = "consul-example"
+  default = "consul-cluster"
 }
 
 variable "vault_cluster_name" {
   description = "What to name the Vault cluster and all of its associated resources"
-  default = "vault-example"
+  default = "vault-cluster"
 }
 
 variable "instance_size" {
