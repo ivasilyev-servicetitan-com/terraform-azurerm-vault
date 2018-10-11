@@ -1,0 +1,679 @@
+{
+	"info": {
+		"_postman_id": "ecd3ff2d-5d62-4200-9ea3-8dd6e111149e",
+		"name": "Vault",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users&Policies",
+			"item": [
+				{
+					"name": "Create token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"policies\":\"provisioner\" }"
+						},
+						"url": {
+							"raw": "{{vault_server}}/v1/auth/token/create",
+							"host": [
+								"{{vault_server}}"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"token",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read capabilities",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"token\": \"8dcaWC0kQlD3mXMxTYYM8Djx\",\r\n  \"path\": \"auth/*\"\r\n}"
+						},
+						"url": {
+							"raw": "{{vault_server}}/v1/sys/capabilities",
+							"host": [
+								"{{vault_server}}"
+							],
+							"path": [
+								"v1",
+								"sys",
+								"capabilities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read self capabilities",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"path\": \"sys/mounts/*\"\r\n}"
+						},
+						"url": {
+							"raw": "{{vault_server}}/v1/sys/capabilities-self",
+							"host": [
+								"{{vault_server}}"
+							],
+							"path": [
+								"v1",
+								"sys",
+								"capabilities-self"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put policy provisioner",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"policy\": \"path \\\"auth/*\\\" { capabilities = [\\\"create\\\", \\\"read\\\", \\\"update\\\", \\\"delete\\\", \\\"list\\\", \\\"sudo\\\"] }\"\r\n}"
+						},
+						"url": {
+							"raw": "{{vault_server}}/v1/sys/policy/provisioner",
+							"host": [
+								"{{vault_server}}"
+							],
+							"path": [
+								"v1",
+								"sys",
+								"policy",
+								"provisioner"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read policy provisioner",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"policy\": \"path \\\"auth/*\\\" { capabilities = [\\\"create\\\", \\\"read\\\", \\\"update\\\", \\\"delete\\\", \\\"list\\\", \\\"sudo\\\"] }\"\r\n}"
+						},
+						"url": {
+							"raw": "{{vault_server}}/v1/sys/policy/provisioner",
+							"host": [
+								"{{vault_server}}"
+							],
+							"path": [
+								"v1",
+								"sys",
+								"policy",
+								"provisioner"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Read/Write data",
+			"item": [
+				{
+					"name": "Max_versions",
+					"item": [
+						{
+							"name": "Set max_versions",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"max_versions\": 10,\r\n  \"cas_required\": false\r\n}"
+								},
+								"url": {
+									"raw": "{{vault_server}}/v1/secret/config",
+									"host": [
+										"{{vault_server}}"
+									],
+									"path": [
+										"v1",
+										"secret",
+										"config"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Read max_versions",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"max_versions\": 4,\r\n  \"cas_required\": false\r\n}"
+								},
+								"url": {
+									"raw": "{{vault_server}}/v1/secret/config",
+									"host": [
+										"{{vault_server}}"
+									],
+									"path": [
+										"v1",
+										"secret",
+										"config"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Set max_versions specific path",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"max_versions\": 4,\r\n  \"cas_required\": false\r\n}"
+								},
+								"url": {
+									"raw": "{{vault_server}}/v1/secret/metadata/customer/acme",
+									"host": [
+										"{{vault_server}}"
+									],
+									"path": [
+										"v1",
+										"secret",
+										"metadata",
+										"customer",
+										"acme"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Read max_versions specific path",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"max_versions\": 10,\r\n  \"cas_required\": false\r\n}"
+								},
+								"url": {
+									"raw": "{{vault_server}}/v1/secret/metadata/customer/acme",
+									"host": [
+										"{{vault_server}}"
+									],
+									"path": [
+										"v1",
+										"secret",
+										"metadata",
+										"customer",
+										"acme"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Write data",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"data\": {\r\n    \"name2\": \"2_ACME Inc.\",\r\n    \"contact_email2\": \"2_jsmith@acme.com\"\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "{{vault_server}}/v1/secret/data/customer/acme",
+							"host": [
+								"{{vault_server}}"
+							],
+							"path": [
+								"v1",
+								"secret",
+								"data",
+								"customer",
+								"acme"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete data",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"versions\":[2] }"
+						},
+						"url": {
+							"raw": "{{vault_server}}/v1/secret/delete/customer/acme",
+							"host": [
+								"{{vault_server}}"
+							],
+							"path": [
+								"v1",
+								"secret",
+								"delete",
+								"customer",
+								"acme"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy data",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"versions\":[2] }"
+						},
+						"url": {
+							"raw": "{{vault_server}}/v1/secret/destroy/customer/acme",
+							"host": [
+								"{{vault_server}}"
+							],
+							"path": [
+								"v1",
+								"secret",
+								"destroy",
+								"customer",
+								"acme"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Undelete data",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"versions\":[1,2] }"
+						},
+						"url": {
+							"raw": "{{vault_server}}/v1/secret/undelete/customer/acme",
+							"host": [
+								"{{vault_server}}"
+							],
+							"path": [
+								"v1",
+								"secret",
+								"undelete",
+								"customer",
+								"acme"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read data",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"data\": {\r\n    \"name\": \"ACME Inc.\",\r\n    \"contact_email\": \"jsmith@acme.com\"\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "{{vault_server}}/v1/secret/data/customer/acme?version=2",
+							"host": [
+								"{{vault_server}}"
+							],
+							"path": [
+								"v1",
+								"secret",
+								"data",
+								"customer",
+								"acme"
+							],
+							"query": [
+								{
+									"key": "version",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read metadata",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"data\": {\r\n    \"name\": \"ACME Inc.\",\r\n    \"contact_email\": \"jsmith@acme.com\"\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "{{vault_server}}/v1/secret/metadata/customer/acme",
+							"host": [
+								"{{vault_server}}"
+							],
+							"path": [
+								"v1",
+								"secret",
+								"metadata",
+								"customer",
+								"acme"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete metadata",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{vault_server}}/v1/secret/metadata/customer/acme",
+							"host": [
+								"{{vault_server}}"
+							],
+							"path": [
+								"v1",
+								"secret",
+								"metadata",
+								"customer",
+								"acme"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Init",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"secret_shares\": 1, \"secret_threshold\": 1}"
+				},
+				"url": {
+					"raw": "{{vault_server}}/v1/sys/init",
+					"host": [
+						"{{vault_server}}"
+					],
+					"path": [
+						"v1",
+						"sys",
+						"init"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unseal",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"key\": \"CyIe6GrKSzlby9sG15jKZTaE0vxf9f2G+73qaIBZi7w=\"\r\n}"
+				},
+				"url": {
+					"raw": "{{vault_server}}/v1/sys/unseal",
+					"host": [
+						"{{vault_server}}"
+					],
+					"path": [
+						"v1",
+						"sys",
+						"unseal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check engines",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Vault-Token",
+						"value": "{{vault_token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{vault_server}}/v1/sys/mounts",
+					"host": [
+						"{{vault_server}}"
+					],
+					"path": [
+						"v1",
+						"sys",
+						"mounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tune engine to v2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Vault-Token",
+						"value": "{{vault_token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"options\": {\r\n      \"version\": \"2\"\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "{{vault_server}}/v1/sys/mounts/secret/tune",
+					"host": [
+						"{{vault_server}}"
+					],
+					"path": [
+						"v1",
+						"sys",
+						"mounts",
+						"secret",
+						"tune"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
