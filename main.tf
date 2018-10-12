@@ -107,7 +107,7 @@ module "vault_servers" {
   image_id = "${var.image_uri}"
   subnet_id = "${azurerm_subnet.consul.id}"
   storage_container_name = "vault"
-  associate_public_ip_address_load_balancer = true
+  associate_public_ip_address_load_balancer = false
 }
 
 # ---------------------------------------------------------------------------------------------------------------------

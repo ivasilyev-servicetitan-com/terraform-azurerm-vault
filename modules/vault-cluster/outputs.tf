@@ -13,7 +13,3 @@ output "cluster_size" {
 output "storage_containter_id" {
   value = "${azurerm_storage_container.vault.id}"
 }
-
-output "load_balancer_ip_address" {
-  value = "${azurerm_public_ip.vault_access.ip_address}"
-}
