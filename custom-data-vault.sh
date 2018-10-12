@@ -14,5 +14,5 @@ readonly VAULT_TLS_CERT_FILE="/opt/vault/tls/vault.crt.pem"
 readonly VAULT_TLS_KEY_FILE="/opt/vault/tls/vault.key.pem"
 
 # The cluster_tag variables below are filled in via Terraform interpolation
-/opt/consul/bin/run-consul --client --scale-set-name "${scale_set_name}" --subscription-id "${subscription_id}" --tenant-id "${tenant_id}" --client-id "${client_id}" --secret-access-key "${secret_access_key}"
+/opt/consul/bin/run-consul --client --scale-set-name "${scale_set_name}" --subscription-id "${subscription_id}" --tenant-id "${tenant_id}" --client-id "${client_id}" --secret-access-key "${secret_access_key}" --promote-vault-service-to-dns
 /opt/vault/bin/run-vault --azure-account-name "${azure_account_name}" --azure-account-key "${azure_account_key}" --azure-container "${azure_container}" --tls-cert-file "$VAULT_TLS_CERT_FILE"  --tls-key-file "$VAULT_TLS_KEY_FILE"
