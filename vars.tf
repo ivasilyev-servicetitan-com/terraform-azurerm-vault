@@ -54,12 +54,12 @@ variable "location" {
 
 variable "address_space" {
   description = "The supernet for the resources that will be created"
-  default = "10.0.0.0/16"
+  default = "10.13.0.0/16"
 }
 
 variable "subnet_address" {
   description = "The subnet that consul resources will be deployed into"
-  default = "10.0.10.0/24"
+  default = "10.13.10.0/24"
 }
 
 variable "consul_cluster_name" {
