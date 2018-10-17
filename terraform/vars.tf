@@ -8,8 +8,6 @@ variable "resource_group_location" {}
 # Vault VNet
 # ---------------------------------------------------------------------------------------------------------------------
 variable "vault_vnet_name" {}
-variable "rm_vnet_address_space" { type = "list" }
-variable "rm_vnet_subnet1_address_space" { }
 variable "rm_vnet_gateway_subnet_address_space" { }
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -24,3 +22,4 @@ variable "vault_vnet_gateway_name" {}
 variable "vault_local_network_gateway_name" {}
 variable "rm_vnet_gateway_shared_key" { }
 variable "classic_vnet_gateway_public_ip" { }
+variable "classic_vnet_address_space" { type = "list" }
