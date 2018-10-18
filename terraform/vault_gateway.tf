@@ -73,3 +73,10 @@ resource "azurerm_virtual_network_gateway_connection" "vault_vnet_to_classic" {
 
   shared_key = "${var.rm_vnet_gateway_shared_key}"
 }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Output
+# ---------------------------------------------------------------------------------------------------------------------
+output "vault_vnet_gateway_public_ip" {
+  value = "${azurerm_public_ip.vault_vnet_gateway.ip_address}"
+}
