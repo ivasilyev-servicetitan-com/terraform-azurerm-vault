@@ -49,7 +49,7 @@ variable "allowed_inbound_cidr_blocks" {
 # ---------------------------------------------------------------------------------------------------------------------
 variable "location" {
   description = "The Azure region the consul cluster will be deployed in"
-  default = "East US"
+  default = "West US"
 }
 
 variable "address_space" {
@@ -74,7 +74,7 @@ variable "vault_cluster_name" {
 
 variable "instance_size" {
   description = "The instance size for the servers"
-  default = "Standard_A0"
+  default = "Standard_D1"
 }
 
 variable "num_consul_servers" {
