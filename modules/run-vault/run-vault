@@ -140,6 +140,8 @@ listener "tcp" {
   tls_cert_file   = "$tls_cert_file"
   tls_key_file    = "$tls_key_file"
 }
+
+ui = true
 EOF
   chown "$user:$user" "$config_path"
 }
