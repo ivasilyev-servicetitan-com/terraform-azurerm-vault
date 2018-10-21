@@ -117,21 +117,9 @@ function generate_vault_config {
 
   log_info "Creating default Vault config file in $config_path"
   cat > "$config_path" <<EOF
-storage "azure" {
-  accountName = "$azure_account_name"
-  accountKey  = "$azure_account_key"
-  container   = "$azure_container"
-}
-
-ha_storage "consul" {
+storage "consul" {
   address = "127.0.0.1:8500"
   path    = "vault/"
-  scheme  = "http"
-  service = "vault"
-
-  # HA settings
-  cluster_addr  = "https://$instance_ip_address:$cluster_port"
-  api_addr = "https://$instance_ip_address:$port"
 }
 
 listener "tcp" {
