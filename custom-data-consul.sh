@@ -10,4 +10,6 @@ exec > >(tee /var/log/custom-data.log|logger -t custom-data -s 2>/dev/console) 2
 
 # These variables are passed in via Terraform template interplation
 /opt/consul/bin/run-consul --server --scale-set-name "${scale_set_name}" --subscription-id "${subscription_id}" --tenant-id "${tenant_id}" --client-id "${client_id}" --secret-access-key "${secret_access_key}"
+# for consul server instance we don't need to monitor Vault in DataDog - remove config file
+rm -f /etc/datadog-agent/conf.d/vault.d/conf.yaml
 sudo service datadog-agent restart
