@@ -1,0 +1,7 @@
+init_config:
+
+instances:
+  - url: "http://127.0.0.1:8500"
+    catalog_checks: true
+    new_leader_checks: true
+    network_latency_checks: true

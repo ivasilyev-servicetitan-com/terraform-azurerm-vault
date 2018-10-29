@@ -48,6 +48,7 @@
         "git clone --branch changes-to-deploy https://{{user `github_oauth_token`}}@github.com/ivasilyev-servicetitan-com/terraform-azurerm-consul.git /tmp/terraform-consul-azure",
         "/tmp/terraform-azurerm-vault/modules/install-vault/install-vault --version {{user `vault_version`}}",
         "/tmp/terraform-consul-azure/modules/install-consul/install-consul --version {{user `consul_version`}}",
+        "/tmp/terraform-azurerm-vault/modules/install-datadog/install-datadog",
         "/tmp/terraform-consul-azure/modules/install-dnsmasq/install-dnsmasq"
       ]
     },

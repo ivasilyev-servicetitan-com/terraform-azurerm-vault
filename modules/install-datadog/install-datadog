@@ -1,0 +1,52 @@
+#!/bin/bash
+# This script can be used to install Datadog. This script has been tested with the following
+# operating systems:
+#
+# 1. Ubuntu 16.04
+
+set -e
+
+readonly DATADOG_KEY="c5ddf73bdce4a8c3a462af20d25bbde7"
+
+readonly VAULT_CONFIG_PATH="/etc/datadog-agent/conf.d/vault.d"
+readonly CONSUL_CONFIG_PATH="/etc/datadog-agent/conf.d/consul.d"
+
+readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+function log {
+  local readonly level="$1"
+  local readonly message="$2"
+  local readonly timestamp=$(date +"%Y-%m-%d %H:%M:%S")
+  >&2 echo -e "${timestamp} [${level}] [$SCRIPT_NAME] ${message}"
+}
+
+function log_info {
+  local readonly message="$1"
+  log "INFO" "$message"
+}
+
+function install_datadog {
+  log_info "Installing Datadog"
+
+  DD_API_KEY=$DATADOG_KEY DD_INSTALL_ONLY=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
+}
+
+function copy_config_files {
+  log_info "Copying Vault config to $VAULT_CONFIG_PATH/conf.yaml"
+  sudo cp "$SCRIPT_DIR/vault.conf.yaml" "$VAULT_CONFIG_PATH/conf.yaml"
+  sudo chmod a+x "$VAULT_CONFIG_PATH/conf.yaml"
+  log_info "Copying Consul config to $CONSUL_CONFIG_PATH/conf.yaml"
+  sudo cp "$SCRIPT_DIR/consul.conf.yaml" "$CONSUL_CONFIG_PATH/conf.yaml"
+  sudo chmod a+x "$CONSUL_CONFIG_PATH/conf.yaml"
+}
+
+function install {
+  log_info "Starting Datadog install"
+
+  install_datadog
+  copy_config_files
+
+  log_info "Datadog install complete!"
+}
+
+install "$@"
